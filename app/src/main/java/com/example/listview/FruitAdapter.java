@@ -27,6 +27,7 @@ public class FruitAdapter extends ArrayAdapter {
         TextView fruitName = (TextView) view.findViewById(R.id.fruit_name);
         fruitImage.setImageResource(fruit.getImageId());
         fruitName.setText(fruit.getName());
+        
         return view;
     }
 }

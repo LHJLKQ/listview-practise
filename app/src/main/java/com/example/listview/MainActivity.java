@@ -3,8 +3,15 @@ package com.example.listview;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +57,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFruits(); // 初始化水果数据
-        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
+        addItemToView();
     }
 
     private void initFruits() {
@@ -63,6 +67,29 @@ public class MainActivity extends Activity {
             fruitList.add(people);
         }
 
+    }
+
+
+
+    public void back(View view) {
+        setContentView(R.layout.activity_main);
+        addItemToView();
+    }
+
+    private  void addItemToView(){
+        initFruits(); // 初始化水果数据
+        FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit_item, fruitList);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                setContentView(R.layout.introduce);
+                ImageView iv = (ImageView) findViewById(R.id.intro);
+                iv.setImageResource(imageId[i]);
+
+            }
+        });
     }
 }
 
